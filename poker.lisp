@@ -79,6 +79,12 @@
 	   (setf (nth 2 (gethash key *jugadores*)) (cons (saca-carta) (nth 2 (gethash key *jugadores*)))))) 
 )
 
+;; Formato de muestra. TODO Usar unicode para mostrar los simbolos de los palos.
+(defun muestra-jugadores () 
+  (loop for key being the hash-keys of *jugadores* do
+       (format t "Jugador: ~a" (nth 0 (gethash key *jugadores*)) )
+       (format t " Dinero: ~a" (nth 3 (gethash key *jugadores*)) )
+       (format t " Mano: ~a~%" (nth 2 (gethash key *jugadores*)) )))
 
 
 ;;;; MODULO POKER
