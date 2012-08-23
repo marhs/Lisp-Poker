@@ -91,7 +91,22 @@
 
 ;; Devuelve una lista del tipo (x . mano) donde X es el valor de la mano (0-Nada - 9-Royal Flush), y la mano ordenada por importancia de cartas (p.ej: dobles parejas: pareja-alta, pareja-baja, carta)
 (defun comprueba-jugada (mano)
+  ;; Comprueba-pares  1, 2, 3, 6, 7
+  ;; Comprueba-escalera 4, 8, 9
+  ;; Comprueba-color 5, 8, 9
+  ;; Genera salida
   )
+
+;; Comprueba las repeticiones de cartas (parejas, dobles, trios, full y poker)
+(defun comprueba-pares (mano)
+)
+
+;; Comprueba las secuencias de cartas (escalera, escalera de color, royal flush)
+(defun comprueba-escalera (mano) )
+
+;; Comprueba el color (color, escalera de color, royal flush)
+(defun comprueba-color (mano) )
+
 
 ;;  Comprueba que jugador tiene la mano mas alta, y en caso de empate, quien tiene su primera carta mas alta (y despues segunda, etc).
 ;; Puede generar empate.
