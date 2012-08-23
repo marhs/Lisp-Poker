@@ -51,11 +51,16 @@
 	    (setf *baraja* (cons (carta valor palo) *baraja*))
        )
   )
+  (shuffle)
   *baraja*)
 ;; TODO
 ;; Mezcla la baraja.
 (defun shuffle ()
-  ; Do nothing
+  (loop for i below (length *baraja*) do
+	(rotatef
+	 (elt *baraja* i)
+	 (elt *baraja* (random (length *baraja*)))))
+  *baraja*
 )
 ;; TODO
 ;; Muestra la baraja en un formato bueno
