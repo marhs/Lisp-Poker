@@ -114,24 +114,26 @@
 	     (setf result (append (list (+ 1 (first result))) (rest result)))
 	     )
 	 (setf aux (car i))
-	 (format t "~a~%" result)
 	 )
-    (format t "~a" result)))
-		  
-	 
-	 
-       
-;; Pareja - 1 '(2)
-
-;; Doble pareja - 2 '(2 2)
-
-;; Trio - 3 '(3)
-
-;; Full - 6 '(2 3) '(3 2)
-
-;; Poker - 7 '(4)
-
-)
+    (setf result (remove 0 (remove 1 result)))
+    (cond
+      ;; Pareja - 1 '(2)
+      ((equal result '(2)) 
+       1)	  
+      ;; Doble pareja - 2 '(2 2)
+      ((equal result '(2 2))
+       2)
+      ;; Trio - 3 '(3)
+      ((equal result '(3))
+       3)
+      ; Full - 6 '(2 3) '(3 2)
+      ((or (equal result '(2 3)) (equal result '(3 2)))
+       6)
+      ;; Poker - 7 '(4)
+      ((equal result '(4))
+       4))
+    )
+  )
 
 ;; Comprueba las secuencias de cartas (escalera, escalera de color, royal flush)
 (defun comprueba-escalera (mano) )
