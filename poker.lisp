@@ -37,7 +37,7 @@
 
 ;; Carta. Valor de 1 a 13 (11, 12 y 13 J, Q y K, respectivamente). 0-3 palos. Si esta mal formada, devuelve NIL.
 (defun carta (valor palo)
-  (if (or (< valor 1) (> valor 13) (< palo 0) (> palo 3))
+  (if (or (< valor 2) (> valor 14) (< palo 0) (> palo 3))
       NIL
       (list valor palo)))
 
@@ -47,7 +47,7 @@
   (loop for key being the hash-keys of *jugadores* do
        (setf (nth 2 (gethash key *jugadores*)) NIL))
   (loop for palo from 0 to 3 do
-       (loop for valor from 1 to 13 do
+       (loop for valor from 2 to 14 do
 	    (setf *baraja* (cons (carta valor palo) *baraja*))
        )
   )
@@ -91,14 +91,46 @@
 
 ;; Devuelve una lista del tipo (x . mano) donde X es el valor de la mano (0-Nada - 9-Royal Flush), y la mano ordenada por importancia de cartas (p.ej: dobles parejas: pareja-alta, pareja-baja, carta)
 (defun comprueba-jugada (mano)
-  ;; Comprueba-pares  1, 2, 3, 6, 7
-  ;; Comprueba-escalera 4, 8, 9
-  ;; Comprueba-color 5, 8, 9
+  ;; Ordena mano
+  (let (x (sort (getat 2 1) #'sort-hand))
+  ;; Comprueba-pares x 1, 2, 3, 6, 7
+  ;; Comprueba-escalera x 4, 8, 9
+  ;; Comprueba-color x 5, 8, 9
   ;; Genera salida
-  )
+  ))
+
+(defun sort-hand (a b)
+  (> (car a) (car b)))
+
+
 
 ;; Comprueba las repeticiones de cartas (parejas, dobles, trios, full y poker)
 (defun comprueba-pares (mano)
+  (let ((result (list 0)) (aux 0))
+    (loop for i in mano do
+	 ; Comprueba si la siguiente carta es una pareja
+	 (if (not (equal aux (car i)))
+	     (setf result (append (list 1) result))
+	     (setf result (append (list (+ 1 (first result))) (rest result)))
+	     )
+	 (setf aux (car i))
+	 (format t "~a~%" result)
+	 )
+    (format t "~a" result)))
+		  
+	 
+	 
+       
+;; Pareja - 1 '(2)
+
+;; Doble pareja - 2 '(2 2)
+
+;; Trio - 3 '(3)
+
+;; Full - 6 '(2 3) '(3 2)
+
+;; Poker - 7 '(4)
+
 )
 
 ;; Comprueba las secuencias de cartas (escalera, escalera de color, royal flush)
